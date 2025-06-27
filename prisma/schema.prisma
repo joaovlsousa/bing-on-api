@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Bingo {
+  id String @id @default(nanoid())
+
+  name  String
+  date  DateTime @db.Date
+  cards Card[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("bingos")
+}
+
+model Card {
+  id      String @id @default(nanoid())
+  bingoId String @map("bingo_id")
+  Bingo   Bingo  @relation(fields: [bingoId], references: [id], onDelete: Cascade)
+
+  number                Int
+  hasSaled              Boolean @default(false) @map("has_saled")
+  amountOfNumbersMarked Int     @default(0) @map("amount_of_numbers_maked")
+
+  columnB Int[] @map("column_b")
+  columnI Int[] @map("column_i")
+  columnN Int[] @map("column_n")
+  columnG Int[] @map("column_g")
+  columnO Int[] @map("column_o")
+
+  buyerName    String? @map("buyer_name")
+  buyerAddress String? @map("buyer_address")
+  buyerPhone   String? @map("buyer_phone")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("cards")
+}
