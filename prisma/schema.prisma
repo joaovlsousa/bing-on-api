@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -9,7 +8,7 @@ datasource db {
 }
 
 model Bingo {
-  id String @id @default(nanoid())
+  id String @id
 
   name  String
   date  DateTime @db.Date
@@ -22,7 +21,7 @@ model Bingo {
 }
 
 model Card {
-  id      String @id @default(nanoid())
+  id      String @id
   bingoId String @map("bingo_id")
   Bingo   Bingo  @relation(fields: [bingoId], references: [id], onDelete: Cascade)
 

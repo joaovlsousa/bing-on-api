@@ -33,6 +33,9 @@
 			"semicolons": "asNeeded",
 			"trailingCommas": "es5",
 			"lineEnding": "crlf"
+		},
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
 		}
 	},
 	"assist": {

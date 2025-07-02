@@ -1,0 +1,7 @@
+POST http://localhost:3333/bingos
+Content-Type: application/json
+
+{
+  "name": "Festa de São José",
+  "date": "2025-05-21T19:00:00.000Z"
+}

@@ -1,8 +1,9 @@
+import { DatabaseModule } from '@infra/database/database.module'
+import { HttpModule } from '@infra/http/http.module'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { envSchema } from './env/env'
 import { EnvModule } from './env/env.module'
-import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
   imports: [
@@ -10,8 +11,9 @@ import { PrismaModule } from './prisma/prisma.module'
       validate: (env) => envSchema.parse(env),
       isGlobal: true,
     }),
-    PrismaModule,
     EnvModule,
+    DatabaseModule,
+    HttpModule,
   ],
 })
 export class AppModule {}
