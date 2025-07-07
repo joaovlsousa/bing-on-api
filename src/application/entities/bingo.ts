@@ -1,7 +1,7 @@
 import { JoinBaseEntityProps } from '@helpers/join-base-entity-props'
 import { BaseEntity } from './base-entity'
 
-interface BingoProps {
+export interface BingoProps {
   name: string
   date: Date
 }
@@ -9,13 +9,19 @@ interface BingoProps {
 export class Bingo extends BaseEntity {
   private props: BingoProps
 
-  constructor(props: JoinBaseEntityProps<BingoProps>) {
-    super({
-      createdAt: props.createdAt,
-      updatedAt: props.updatedAt,
-    })
+  constructor(props: JoinBaseEntityProps<BingoProps>, id?: string) {
+    super(
+      {
+        createdAt: props.createdAt,
+        updatedAt: props.updatedAt,
+      },
+      id
+    )
 
-    this.props = props
+    this.props = {
+      date: props.date,
+      name: props.name,
+    }
   }
 
   public get name(): string {

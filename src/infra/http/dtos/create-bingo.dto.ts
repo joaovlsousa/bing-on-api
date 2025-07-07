@@ -1,6 +1,6 @@
 import { IsDateString, IsNotEmpty, MinLength } from 'class-validator'
 
-export class CreateBingoDTO {
+export class SaveBingoDTO {
   @IsNotEmpty()
   @MinLength(3)
   name: string

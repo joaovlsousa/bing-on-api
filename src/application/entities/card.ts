@@ -30,12 +30,16 @@ export class Card extends BaseEntity {
           amountOfNumbersMarked?: number
         }
       >
-    >
+    >,
+    id?: string
   ) {
-    super({
-      createdAt: props.createdAt,
-      updatedAt: props.updatedAt,
-    })
+    super(
+      {
+        createdAt: props.createdAt,
+        updatedAt: props.updatedAt,
+      },
+      id
+    )
 
     this.props = {
       ...props,
