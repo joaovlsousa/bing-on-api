@@ -1,17 +1,33 @@
-POST http://localhost:3333/bingos
+# Variables
+@baseUrl = http://localhost:3333
+@bingoId = {{createBingo.response.body.$.bingoId}}
+
+# @name createBingo
+POST {{baseUrl}}/bingos
 Content-Type: application/json
 
 {
-  "name": "Bingo teste",
-  "date": "2025-05-21T19:00:00.000Z"
+  "name": "Bingo da Terça",
+  "date": "2025-07-15T00:00:00.000Z"
 }
 
 ###
 
-PUT http://localhost:3333/bingos/e332b62c6157
+# @name updateBingo
+PUT {{baseUrl}}/bingos/{{bingoId}}
 Content-Type: application/json
 
 {
-  "name": "Bingo atualizado",
-  "date": "2025-05-07T19:00:00.000Z"
+  "name": "Bingo da Terça-Feira",
+  "date": "2025-07-15T00:00:00.000Z"
 }
+
+###
+
+# @name getBingos
+GET {{baseUrl}}/bingos
+
+###
+
+# @name getBingo
+GET {{baseUrl}}/bingos/{{bingoId}}

@@ -7,5 +7,5 @@ export class SaveBingoDTO {
 
   @IsNotEmpty()
   @IsDateString()
-  date: Date
+  date: string
 }

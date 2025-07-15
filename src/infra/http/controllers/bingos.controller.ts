@@ -1,14 +1,35 @@
 import { CreateBingo } from '@application/use-cases/create-bingo'
+import { GetAllBingos } from '@application/use-cases/get-all-bingos'
+import { GetBingo } from '@application/use-cases/get-bingo'
 import { UpdateBingo } from '@application/use-cases/update-bingo'
-import { Body, Controller, Param, Post, Put } from '@nestjs/common'
-import { SaveBingoDTO } from '../dtos/create-bingo.dto'
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
+import { SaveBingoDTO } from '../dtos/save-bingo.dto'
+import { BingoViewModel } from '../view-models/bingo-view-model'
 
 @Controller('bingos')
 export class BingosController {
   constructor(
     private createBingo: CreateBingo,
-    private updateBingo: UpdateBingo
+    private updateBingo: UpdateBingo,
+    private getAllBingos: GetAllBingos,
+    private getBingo: GetBingo
   ) {}
+
+  @Get()
+  async getAll() {
+    const { bingos } = await this.getAllBingos.execute()
+
+    return bingos.map(BingoViewModel.toHTTP)
+  }
+
+  @Get(':bingoId')
+  async getOne(@Param('bingoId') bingoId: string) {
+    const { bingo } = await this.getBingo.execute({ bingoId })
+
+    return {
+      bingo: BingoViewModel.toHTTP(bingo),
+    }
+  }
 
   @Post()
   async create(@Body() body: SaveBingoDTO) {
@@ -16,15 +37,11 @@ export class BingosController {
 
     const { bingo } = await this.createBingo.execute({
       name,
-      date,
+      date: new Date(date),
     })
 
     return {
-      id: bingo.id,
-      name: bingo.name,
-      date: bingo.date,
-      createdAt: bingo.createdAt,
-      updatedAt: bingo.updatedAt,
+      bingoId: bingo.id,
     }
   }
 
@@ -35,15 +52,11 @@ export class BingosController {
     const { bingo } = await this.updateBingo.execute({
       bingoId,
       name,
-      date,
+      date: new Date(date),
     })
 
     return {
-      id: bingo.id,
-      name: bingo.name,
-      date: bingo.date,
-      createdAt: bingo.createdAt,
-      updatedAt: bingo.updatedAt,
+      bingoId: bingo.id,
     }
   }
 }
