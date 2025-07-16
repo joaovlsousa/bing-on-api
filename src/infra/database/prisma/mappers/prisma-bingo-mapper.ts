@@ -12,7 +12,7 @@ export class PrismaBingoMapper {
     }
   }
 
-  static toDomain(raw: RawBingo) {
+  static toDomain(raw: RawBingo): Bingo {
     return new Bingo(
       {
         date: raw.date,

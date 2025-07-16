@@ -1,5 +1,6 @@
 import { Card } from '@application/entities/card'
 
 export abstract class CardsRepository {
-  abstract create(card: Card): Promise<void>
+  abstract saveMany(cards: Card[]): Promise<void>
+  abstract findLastByBingoId(bingoId: string): Promise<Card | null>
 }

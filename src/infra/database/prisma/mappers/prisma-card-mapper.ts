@@ -1,4 +1,6 @@
 import { Card } from '@application/entities/card'
+import { Column } from '@application/entities/column'
+import { Card as RawCard } from '@prisma/client'
 
 export class PrismaCardMapper {
   static toPrisma(card: Card) {
@@ -18,5 +20,27 @@ export class PrismaCardMapper {
       createdAt: card.createdAt,
       updatedAt: card.updatedAt ?? undefined,
     }
+  }
+
+  static toDomain(raw: RawCard): Card {
+    return new Card(
+      {
+        bingoId: raw.bingoId,
+        number: raw.number,
+        columnB: new Column(raw.columnB),
+        columnI: new Column(raw.columnI),
+        columnN: new Column(raw.columnN),
+        columnG: new Column(raw.columnG),
+        columnO: new Column(raw.columnO),
+        amountOfNumbersMarked: raw.amountOfNumbersMarked,
+        hasSaled: raw.hasSaled,
+        buyerAddress: raw.buyerAddress,
+        buyerName: raw.buyerName,
+        buyerPhone: raw.buyerPhone,
+        createdAt: raw.createdAt,
+        updatedAt: raw.updatedAt,
+      },
+      raw.id
+    )
   }
 }

@@ -1,7 +1,9 @@
 import { BingosRepository } from '@application/repositories/bingos-repository'
+import { CardsRepository } from '@application/repositories/cards-repository'
 import { Module } from '@nestjs/common'
 import { PrismaService } from './prisma/prisma.service'
 import { PrismaBingosRepository } from './prisma/repositories/prisma-bingos-repository'
+import { PrismaCardsRepository } from './prisma/repositories/prisma-cards-repository'
 
 @Module({
   providers: [
@@ -10,7 +12,11 @@ import { PrismaBingosRepository } from './prisma/repositories/prisma-bingos-repo
       provide: BingosRepository,
       useClass: PrismaBingosRepository,
     },
+    {
+      provide: CardsRepository,
+      useClass: PrismaCardsRepository,
+    },
   ],
-  exports: [BingosRepository],
+  exports: [BingosRepository, CardsRepository],
 })
 export class DatabaseModule {}

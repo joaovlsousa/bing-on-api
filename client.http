@@ -2,6 +2,9 @@
 @baseUrl = http://localhost:3333
 @bingoId = {{createBingo.response.body.$.bingoId}}
 
+###
+
+# Bingos
 # @name createBingo
 POST {{baseUrl}}/bingos
 Content-Type: application/json
@@ -31,3 +34,14 @@ GET {{baseUrl}}/bingos
 
 # @name getBingo
 GET {{baseUrl}}/bingos/{{bingoId}}
+
+###
+
+# Cards
+# @name saveCards
+POST {{baseUrl}}/bingos/{{bingoId}}/cards
+Content-Type: application/json
+
+{
+  "quantity": 1500
+}
