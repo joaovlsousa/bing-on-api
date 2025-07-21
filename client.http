@@ -50,3 +50,16 @@ Content-Type: application/json
 
 # @name getAllCardsNotSaled
 GET {{baseUrl}}/bingos/{{bingoId}}/cards
+
+###
+
+# @name sellCards
+POST {{baseUrl}}/bingos/{{bingoId}}/cards/sell
+Content-Type: application/json
+
+{
+  "buyerAddress": "Fake Address",
+  "buyerName": "Fake Name",
+  "buyerPhone": "Fake Phone",
+  "cardsNumbers": [1001, 1002, 1005]
+}

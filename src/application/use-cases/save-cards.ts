@@ -1,9 +1,8 @@
 import { Card } from '@application/entities/card'
-import { Column } from '@application/entities/column'
 import { CardsRepository } from '@application/repositories/cards-repository'
-import { GenerateCard } from '@helpers/generate-card'
 import { verifyCardsQuantityRequested } from '@helpers/verify-cards-quantity-requested'
 import { BadRequestException, Injectable } from '@nestjs/common'
+import { makeCard } from '@test/factories/card-factory'
 
 interface SaveCardsRequest {
   bingoId: string
@@ -28,27 +27,16 @@ export class SaveCards {
     let cardNumber = quantityCards + 1001
 
     for (let i = 0; i < quantity; i++) {
-      const columnB = new Column(GenerateCard.generateColumnB())
-      const columnI = new Column(GenerateCard.generateColumnI())
-      const columnN = new Column(GenerateCard.generateColumnN())
-      const columnG = new Column(GenerateCard.generateColumnG())
-      const columnO = new Column(GenerateCard.generateColumnO())
-
       cards.push(
-        new Card({
+        makeCard({
           bingoId,
           number: cardNumber,
-          columnB,
-          columnI,
-          columnN,
-          columnG,
-          columnO,
         })
       )
 
       cardNumber++
     }
 
-    await this.cardsRepository.saveMany(cards)
+    await this.cardsRepository.createMany(cards)
   }
 }

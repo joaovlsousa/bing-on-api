@@ -1,18 +1,37 @@
-import { Card } from './card'
-import { Column } from './column'
+import { makeCard } from '@test/factories/card-factory'
 
 describe('Card', () => {
   it('should be able to create a card', () => {
-    const card = new Card({
-      bingoId: 'binngo-id',
-      number: 10001,
-      columnB: new Column([1, 2, 3, 4, 15]),
-      columnI: new Column([16, 17, 18, 19, 30]),
-      columnN: new Column([31, 32, 33, 34, 45]),
-      columnG: new Column([51, 52, 53, 54, 60]),
-      columnO: new Column([61, 62, 63, 74, 75]),
-    })
+    const card = makeCard()
 
     expect(card).toBeTruthy()
+  })
+
+  it('should be able to sell to card', () => {
+    const card = makeCard()
+    card.sell({
+      buyerName: 'Fake Name',
+      buyerAddress: 'Fake Address',
+      buyerPhone: 'Fake Phone',
+    })
+
+    expect(card.hasSaled).toEqual(true)
+  })
+
+  it('should be not able to sell to card', () => {
+    const card = makeCard()
+    card.sell({
+      buyerName: 'Fake Name',
+      buyerAddress: 'Fake Address',
+      buyerPhone: 'Fake Phone',
+    })
+
+    expect(() => {
+      card.sell({
+        buyerName: 'Fake Name',
+        buyerAddress: 'Fake Address',
+        buyerPhone: 'Fake Phone',
+      })
+    }).toThrow()
   })
 })

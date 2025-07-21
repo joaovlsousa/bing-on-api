@@ -3,7 +3,13 @@ import { Replace } from '@helpers/replace'
 import { BaseEntity } from './base-entity'
 import { Column } from './column'
 
-interface CardProps {
+interface SellProps {
+  buyerName: string
+  buyerAddress: string
+  buyerPhone: string
+}
+
+export interface CardProps {
   bingoId: string
   number: number
   hasSaled: boolean
@@ -46,6 +52,17 @@ export class Card extends BaseEntity {
       hasSaled: props.hasSaled ?? false,
       amountOfNumbersMarked: props.amountOfNumbersMarked ?? 0,
     }
+  }
+
+  public sell(props: SellProps): void {
+    if (this.props.hasSaled) {
+      throw new Error('This card has sold')
+    }
+
+    this.props.hasSaled = true
+    this.props.buyerName = props.buyerName
+    this.props.buyerAddress = props.buyerAddress
+    this.props.buyerPhone = props.buyerPhone
   }
 
   public get bingoId(): string {

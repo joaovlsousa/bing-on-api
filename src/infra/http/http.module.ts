@@ -3,6 +3,7 @@ import { GetAllBingos } from '@application/use-cases/get-all-bingos'
 import { GetAllCardsNotSaled } from '@application/use-cases/get-all-cards-not-saled'
 import { GetBingo } from '@application/use-cases/get-bingo'
 import { SaveCards } from '@application/use-cases/save-cards'
+import { SellCards } from '@application/use-cases/sell-cards'
 import { UpdateBingo } from '@application/use-cases/update-bingo'
 import { DatabaseModule } from '@infra/database/database.module'
 import { Module } from '@nestjs/common'
@@ -19,6 +20,7 @@ import { CardsController } from './controllers/cards.controller'
     GetBingo,
     SaveCards,
     GetAllCardsNotSaled,
+    SellCards,
   ],
 })
 export class HttpModule {}
