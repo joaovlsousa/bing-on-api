@@ -23,9 +23,9 @@ export class SaveCards {
       throw new BadRequestException('Incorrect quantity')
     }
 
-    const lastCard = await this.cardsRepository.findLastByBingoId(bingoId)
+    const quantityCards = await this.cardsRepository.countByBingoId(bingoId)
     const cards: Card[] = []
-    let cardNumber = lastCard?.number ?? 1001
+    let cardNumber = quantityCards + 1001
 
     for (let i = 0; i < quantity; i++) {
       const columnB = new Column(GenerateCard.generateColumnB())

@@ -20,7 +20,7 @@ describe('Save cards', () => {
     })
 
     expect(cardsRepository.cards).toHaveLength(1000)
-    expect(cardsRepository.cards[500].number).toEqual(1500)
+    expect(cardsRepository.cards[500].number).toEqual(1501)
   })
 
   it('should not be able to save cards', async () => {

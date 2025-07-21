@@ -5,6 +5,7 @@ import { SaveCardsDTO } from '../dtos/save-cards.dto'
 @Controller()
 export class CardsController {
   constructor(private saveCards: SaveCards) {}
+
   @Post('bingos/:bingoId/cards')
   async save(@Body() body: SaveCardsDTO, @Param('bingoId') bingoId: string) {
     const { quantity } = body

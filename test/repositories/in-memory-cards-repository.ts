@@ -8,15 +8,7 @@ export class InMemoryCardsRepository implements CardsRepository {
     this.cards.push(...cards)
   }
 
-  async findLastByBingoId(bingoId: string): Promise<Card | null> {
-    for (let i = this.cards.length - 1; i >= 0; i--) {
-      const card = this.cards[i]
-
-      if (card.bingoId === bingoId) {
-        return card
-      }
-    }
-
-    return null
+  async countByBingoId(bingoId: string): Promise<number> {
+    return this.cards.filter((card) => card.bingoId === bingoId).length
   }
 }

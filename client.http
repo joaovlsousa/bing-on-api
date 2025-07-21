@@ -10,8 +10,8 @@ POST {{baseUrl}}/bingos
 Content-Type: application/json
 
 {
-  "name": "Bingo da Terça",
-  "date": "2025-07-15T00:00:00.000Z"
+  "name": "Bingo Teste",
+  "date": "2025-07-25T00:00:00.000Z"
 }
 
 ###
@@ -43,5 +43,5 @@ POST {{baseUrl}}/bingos/{{bingoId}}/cards
 Content-Type: application/json
 
 {
-  "quantity": 1500
+  "quantity": 500
 }
