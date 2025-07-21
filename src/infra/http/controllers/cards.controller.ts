@@ -1,12 +1,16 @@
+import { GetAllCardsNotSaled } from '@application/use-cases/get-all-cards-not-saled'
 import { SaveCards } from '@application/use-cases/save-cards'
-import { Body, Controller, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { SaveCardsDTO } from '../dtos/save-cards.dto'
 
-@Controller()
+@Controller('bingos/:bingoId/cards')
 export class CardsController {
-  constructor(private saveCards: SaveCards) {}
+  constructor(
+    private saveCards: SaveCards,
+    private getAllCardsNotSaled: GetAllCardsNotSaled
+  ) {}
 
-  @Post('bingos/:bingoId/cards')
+  @Post()
   async save(@Body() body: SaveCardsDTO, @Param('bingoId') bingoId: string) {
     const { quantity } = body
 
@@ -14,5 +18,14 @@ export class CardsController {
       bingoId,
       quantity,
     })
+  }
+
+  @Get()
+  async getAll(@Param('bingoId') bingoId: string) {
+    const { cards } = await this.getAllCardsNotSaled.execute({
+      bingoId,
+    })
+
+    return cards
   }
 }

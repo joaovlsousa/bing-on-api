@@ -8,6 +8,17 @@ import { PrismaService } from '../prisma.service'
 export class PrismaCardsRepository implements CardsRepository {
   constructor(private prisma: PrismaService) {}
 
+  async findAllNotSaled(bingoId: string): Promise<Card[]> {
+    const raw = await this.prisma.card.findMany({
+      where: {
+        bingoId,
+        hasSaled: false,
+      },
+    })
+
+    return raw.map(PrismaCardMapper.toDomain)
+  }
+
   async countByBingoId(bingoId: string): Promise<number> {
     const quantityCards = await this.prisma.card.count({
       where: {

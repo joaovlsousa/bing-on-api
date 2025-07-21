@@ -45,3 +45,8 @@ Content-Type: application/json
 {
   "quantity": 500
 }
+
+###
+
+# @name getAllCardsNotSaled
+GET {{baseUrl}}/bingos/{{bingoId}}/cards

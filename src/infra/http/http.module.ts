@@ -1,5 +1,6 @@
 import { CreateBingo } from '@application/use-cases/create-bingo'
 import { GetAllBingos } from '@application/use-cases/get-all-bingos'
+import { GetAllCardsNotSaled } from '@application/use-cases/get-all-cards-not-saled'
 import { GetBingo } from '@application/use-cases/get-bingo'
 import { SaveCards } from '@application/use-cases/save-cards'
 import { UpdateBingo } from '@application/use-cases/update-bingo'
@@ -11,6 +12,13 @@ import { CardsController } from './controllers/cards.controller'
 @Module({
   imports: [DatabaseModule],
   controllers: [BingosController, CardsController],
-  providers: [CreateBingo, UpdateBingo, GetAllBingos, GetBingo, SaveCards],
+  providers: [
+    CreateBingo,
+    UpdateBingo,
+    GetAllBingos,
+    GetBingo,
+    SaveCards,
+    GetAllCardsNotSaled,
+  ],
 })
 export class HttpModule {}

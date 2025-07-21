@@ -8,6 +8,12 @@ export class InMemoryCardsRepository implements CardsRepository {
     this.cards.push(...cards)
   }
 
+  async findAllNotSaled(bingoId: string): Promise<Card[]> {
+    return this.cards.filter(
+      (card) => card.bingoId === bingoId && card.hasSaled === false
+    )
+  }
+
   async countByBingoId(bingoId: string): Promise<number> {
     return this.cards.filter((card) => card.bingoId === bingoId).length
   }

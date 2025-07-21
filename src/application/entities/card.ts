@@ -60,6 +60,10 @@ export class Card extends BaseEntity {
     return this.props.amountOfNumbersMarked
   }
 
+  public get hasSaled(): boolean {
+    return this.props.hasSaled
+  }
+
   public get columnB(): Column {
     return this.props.columnB
   }
