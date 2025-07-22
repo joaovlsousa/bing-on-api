@@ -37,6 +37,11 @@ GET {{baseUrl}}/bingos/{{bingoId}}
 
 ###
 
+# @name startBingo
+PATCH {{baseUrl}}/bingos/{{bingoId}}/start
+
+###
+
 # Cards
 # @name saveCards
 POST {{baseUrl}}/bingos/{{bingoId}}/cards

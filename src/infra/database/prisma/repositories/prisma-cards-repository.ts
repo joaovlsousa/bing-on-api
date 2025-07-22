@@ -37,6 +37,15 @@ export class PrismaCardsRepository implements CardsRepository {
     return raw.map(PrismaCardMapper.toDomain)
   }
 
+  async removeAllNotSaled(bingoId: string): Promise<void> {
+    await this.prisma.card.deleteMany({
+      where: {
+        bingoId,
+        hasSaled: false,
+      },
+    })
+  }
+
   async countByBingoId(bingoId: string): Promise<number> {
     const quantityCards = await this.prisma.card.count({
       where: {

@@ -25,6 +25,13 @@ export class InMemoryCardsRepository implements CardsRepository {
     )
   }
 
+  async removeAllNotSaled(bingoId: string): Promise<void> {
+    this.cards = this.cards.filter(
+      (card) =>
+        card.bingoId !== bingoId || (card.bingoId === bingoId && card.hasSaled)
+    )
+  }
+
   async countByBingoId(bingoId: string): Promise<number> {
     return this.cards.filter((card) => card.bingoId === bingoId).length
   }

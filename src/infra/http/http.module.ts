@@ -4,6 +4,7 @@ import { GetAllCardsNotSaled } from '@application/use-cases/get-all-cards-not-sa
 import { GetBingo } from '@application/use-cases/get-bingo'
 import { SaveCards } from '@application/use-cases/save-cards'
 import { SellCards } from '@application/use-cases/sell-cards'
+import { StartBingo } from '@application/use-cases/start-bingo'
 import { UpdateBingo } from '@application/use-cases/update-bingo'
 import { DatabaseModule } from '@infra/database/database.module'
 import { Module } from '@nestjs/common'
@@ -18,6 +19,7 @@ import { CardsController } from './controllers/cards.controller'
     UpdateBingo,
     GetAllBingos,
     GetBingo,
+    StartBingo,
     SaveCards,
     GetAllCardsNotSaled,
     SellCards,

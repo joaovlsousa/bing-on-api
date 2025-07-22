@@ -1,8 +1,9 @@
 import { CreateBingo } from '@application/use-cases/create-bingo'
 import { GetAllBingos } from '@application/use-cases/get-all-bingos'
 import { GetBingo } from '@application/use-cases/get-bingo'
+import { StartBingo } from '@application/use-cases/start-bingo'
 import { UpdateBingo } from '@application/use-cases/update-bingo'
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, Put } from '@nestjs/common'
 import { SaveBingoDTO } from '../dtos/save-bingo.dto'
 import { BingoViewModel } from '../view-models/bingo-view-model'
 
@@ -12,7 +13,8 @@ export class BingosController {
     private createBingo: CreateBingo,
     private updateBingo: UpdateBingo,
     private getAllBingos: GetAllBingos,
-    private getBingo: GetBingo
+    private getBingo: GetBingo,
+    private startBingo: StartBingo
   ) {}
 
   @Get()
@@ -29,6 +31,11 @@ export class BingosController {
     return {
       bingo: BingoViewModel.toHTTP(bingo),
     }
+  }
+
+  @Patch(':bingoId/start')
+  async start(@Param('bingoId') bingoId: string) {
+    await this.startBingo.execute({ bingoId })
   }
 
   @Post()
